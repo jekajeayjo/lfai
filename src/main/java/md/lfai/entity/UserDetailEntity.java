@@ -14,7 +14,7 @@ public class UserDetailEntity {
     private String im;
     @Column
     private String ot;
-    @Column
+    @Column(name = "number_phone")
     private String numberPhone;
 //    @OneToMany(mappedBy = "userDetailEntity")
 //    private List<UserEntity> userEntityList;

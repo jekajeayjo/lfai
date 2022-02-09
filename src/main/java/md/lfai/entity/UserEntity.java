@@ -12,12 +12,12 @@ public class UserEntity {
     @Column
     private String password;
     @ManyToOne
-    @JoinColumn(name = "role_fk")
+    @JoinColumn(name = "fk_role")
     private UserRoleTypeEntity role;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "fk_user_detail")
     UserDetailEntity userDetailEntity;
-    @Column
+    @Column(name = "number_phone")
     private String numberPhone;
 
     public Long getId() {

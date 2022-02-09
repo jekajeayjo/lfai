@@ -1,7 +1,7 @@
 create table "ref_catalog_type"
 (
     id bigserial
-        constraint "ref-user-type_pk"
+        constraint "ref-catalog-type_pk"
             primary key,
     code varchar(255),
     name varchar(255)

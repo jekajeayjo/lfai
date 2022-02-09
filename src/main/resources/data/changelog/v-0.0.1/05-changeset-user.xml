@@ -9,19 +9,19 @@
     http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
     <!--    является полным аналогом коммитов управленеи версий как git -->
-    <changeSet id="2" author="e.baldji">
+    <changeSet id="1" author="e.baldji">
 
         <!--        сопоставление с файлом что бы не запутатся ЫЙД sqlfile- это вызов  скрипта-->
         <!--        Есть два способа создания и работ с таблиц с помощью sqlfile(это скрипт ) и мы его просто вызываем
          второй способ через xml уже пишем в ручную xml над создание таблицы -->
-        <sqlFile path="02-create-ref-catalog-type.sql"
+        <sqlFile path="05-create-user.sql"
                  dbms="postgresql"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>
         <rollback>
             <sqlFile
-                    path="02-drop-ref-catalog-type.sql"
+                    path="05-drop-user.sql"
                     dbms="postgresql"
                     encoding="UTF-8"
                     relativeToChangelogFile="true"

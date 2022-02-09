@@ -16,5 +16,9 @@
     <!--   Создание справчоников-->
     <include file="01-changeset-ref-user-role-type.xml" relativeToChangelogFile="true"/>
     <include file="02-changeset-ref-catalog-type.xml" relativeToChangelogFile="true"/>
+    <include file="03-changeset-catalog.xml" relativeToChangelogFile="true"/>
+    <include file="04-changeset-user-detail.xml" relativeToChangelogFile="true"/>
+    <include file="05-changeset-user.xml" relativeToChangelogFile="true"/>
+
 
 </databaseChangeLog>
