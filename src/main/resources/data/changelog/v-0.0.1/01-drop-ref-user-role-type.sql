@@ -1,0 +1,1 @@
+drop table "ref_user_role_type";
