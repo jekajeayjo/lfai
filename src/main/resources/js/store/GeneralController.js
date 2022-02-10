@@ -28,11 +28,16 @@ const resource_print = 'http://25.133.210.152:8888/ods/print'
 export default {
     state: {
         gateUrl:'',
-
+        error: null,
 
     },
     mutations: {
-
+        SET_ERROR(state, payload) {
+            state.error = payload
+        },
+        CLEAN_ERROR(state) {
+            state.error = null
+        },
     }
     , actions: {
 
@@ -91,7 +96,7 @@ export default {
     },
     getters: {
         getGateUrl:(state)=>state.gateUrl,
-
+        getError: (state) => state.error,
 
     }
 

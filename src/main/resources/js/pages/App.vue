@@ -1,8 +1,7 @@
 <template>
   <v-app>
-    <v-overlay :value="overlay" absolute>
-    </v-overlay>
-<!--    <app-header v-if="showLeftMenu==true &&$route.name!='OsagoPmrDetailInfo' " :showlog="showLeftMenu"/>-->
+
+    <app-header/>
     <app-left-menu />
 <!--    <happening-r-igh-menu v-if="isHappenMenu==true" class="mt-12"></happening-r-igh-menu>-->
 <!--    <harmed-menu v-if="isHarmedMenu==true"></harmed-menu>-->
@@ -30,7 +29,7 @@
 
 <script>
 //
-//import AppHeader from "../components/AppHeader.vue";
+import AppHeader from "../components/AppHeader.vue";
 import AppLeftMenu from "../components/AppLeftMenu.vue";
 //import HappeningRIghMenu from "../views/contracts/happening/HappeningRIghMenu.vue";
 //import HarmedMenu from "../views/contracts/happening/happeningtType/osago/typeharmed/HarmedMenu.vue";
@@ -38,7 +37,7 @@ export default {
   name: 'App',
 
   components: {
-    // AppHeader,
+    AppHeader,
     AppLeftMenu,
     // HappeningRIghMenu,
     // HarmedMenu

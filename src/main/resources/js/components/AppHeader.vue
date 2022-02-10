@@ -1,8 +1,8 @@
 <template>
   <div id="layer2">
 
-    <v-overlay :value="overlay" absolute>
-    </v-overlay>
+<!--    <v-overlay :value="overlay" absolute>-->
+<!--    </v-overlay>-->
     <v-app-bar
         app
         light
