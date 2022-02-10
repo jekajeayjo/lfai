@@ -2,6 +2,7 @@ package md.lfai.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import md.lfai.dto.UserDetailDto;
+import md.lfai.dto.UserDto;
 import md.lfai.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,27 +22,27 @@ public class UserController {
     private static final String UPDATE = "/update";
 
     @GetMapping(LIST)
-    @Tag(name = "Список пользователей")
+
     public List<UserDetailDto> list() {
-        return null;
+        return userService.list();
     }
 
     @GetMapping(GET)
-    @Tag(name = "Получить пользователя")
+
     public UserDetailDto get(@PathVariable("id") Long id) {
-        return null;
+        return userService.get(id);
     }
 
     @GetMapping(ADD)
-    @Tag(name = "Добавить пользователя")
-    public UserDetailDto add(@RequestBody UserDetailDto userDetailDto) {
-        return null;
+
+    public UserDto add(@RequestBody UserDto userDetailDto) {
+        return userService.add(userDetailDto);
     }
 
     @GetMapping(UPDATE)
-    @Tag(name = "Редактировать пользователя")
-    public UserDetailDto update(@RequestBody UserDetailDto userDetailDto) {
-        return null;
+
+    public UserDto update(@RequestBody UserDto userDetailDto) {
+        return userService.update(userDetailDto);
     }
 
 }

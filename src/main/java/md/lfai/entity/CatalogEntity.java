@@ -16,7 +16,7 @@ public class CatalogEntity {
     private String description;
     @ManyToOne
     @JoinColumn(name = "catalot_type_fk")
-    CatalogTypeEntity catalogTypeEntity;
+    CatalogTypeEntity catalogType;
 
     public Long getId() {
         return id;
@@ -50,11 +50,11 @@ public class CatalogEntity {
         this.description = description;
     }
 
-    public CatalogTypeEntity getCatalogTypeEntity() {
-        return catalogTypeEntity;
+    public CatalogTypeEntity getCatalogType() {
+        return catalogType;
     }
 
-    public void setCatalogTypeEntity(CatalogTypeEntity catalogTypeEntity) {
-        this.catalogTypeEntity = catalogTypeEntity;
+    public void setCatalogType(CatalogTypeEntity catalogType) {
+        this.catalogType = catalogType;
     }
 }
