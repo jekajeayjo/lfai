@@ -14,6 +14,8 @@ public class CatalogEntity {
     private Double price;
     @Column
     private String description;
+    @Column
+    private String img;
     @ManyToOne
     @JoinColumn(name = "catalot_type_fk")
     CatalogTypeEntity catalogType;
@@ -56,5 +58,13 @@ public class CatalogEntity {
 
     public void setCatalogType(CatalogTypeEntity catalogType) {
         this.catalogType = catalogType;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

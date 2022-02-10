@@ -4,12 +4,14 @@ create table "catalog" (
                                      name varchar(255),
                                      price bigserial,
                                      description varchar(255),
+                                     img varchar(255),
                                      fk_catalog_type bigserial
 
 );
 comment on table "catalog" is 'Товары';
 comment on column "catalog".fk_catalog_type is 'Тип товара';
 comment on column "catalog".name is 'Наименование';
+comment on column "catalog".img is 'Изображение';
 comment on column "catalog".description is 'Описание';
 
 alter table "catalog"
