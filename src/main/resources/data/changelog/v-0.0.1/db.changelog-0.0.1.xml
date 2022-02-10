@@ -14,6 +14,7 @@
 <!--   Создание основных справочников-->
 <!--   Создание типов продуктов-->
     <!--   Создание справчоников-->
+    <include file="00-changeset-ref-user-status.xml" relativeToChangelogFile="true"/>
     <include file="01-changeset-ref-user-role-type.xml" relativeToChangelogFile="true"/>
     <include file="02-changeset-ref-catalog-type.xml" relativeToChangelogFile="true"/>
     <include file="03-changeset-catalog.xml" relativeToChangelogFile="true"/>

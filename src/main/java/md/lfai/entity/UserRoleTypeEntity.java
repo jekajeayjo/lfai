@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "REF_USER_ROLE_TYPE")
 public class UserRoleTypeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "NAME")
     private String name;

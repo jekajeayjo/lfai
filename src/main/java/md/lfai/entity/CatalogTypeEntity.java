@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "REF_CATALOG_TYPE")
 public class CatalogTypeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "name")
     private String name;

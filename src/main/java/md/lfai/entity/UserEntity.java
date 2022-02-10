@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "USER")
 public class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
     private String login;
@@ -16,9 +17,12 @@ public class UserEntity {
     private UserRoleTypeEntity role;
     @ManyToOne
     @JoinColumn(name = "fk_user_detail")
-    UserDetailEntity userDetailEntity;
+    UserDetailEntity userDetail;
     @Column(name = "number_phone")
     private String numberPhone;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private   RefUserStatusEnum status;
 
     public Long getId() {
         return id;
@@ -60,11 +64,19 @@ public class UserEntity {
         this.numberPhone = numberPhone;
     }
 
-    public UserDetailEntity getUserDetailEntity() {
-        return userDetailEntity;
+    public UserDetailEntity getUserDetail() {
+        return userDetail;
     }
 
-    public void setUserDetailEntity(UserDetailEntity userDetailEntity) {
-        this.userDetailEntity = userDetailEntity;
+    public void setUserDetail(UserDetailEntity userDetail) {
+        this.userDetail = userDetail;
+    }
+
+    public RefUserStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(RefUserStatusEnum status) {
+        this.status = status;
     }
 }
