@@ -10,7 +10,7 @@ module.exports = {
         compress: true,
         port: 8000,
         allowedHosts: [
-            'localhost:9001'
+            'localhost:8080'
         ],
         stats: 'errors-only',
         clientLogLevel: 'error',

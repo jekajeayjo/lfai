@@ -47,9 +47,8 @@ export default {
 
   mounted() {
 
-    this.showLeftMenu = this.isauthenticated
-    this.$store.dispatch("IS_HAPPENING_MENU",{data:false})
-    this.$store.dispatch("IS_HARMED_MENU",{data:false})
+
+
   },
   computed: {
     routName() {
