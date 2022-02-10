@@ -16,29 +16,29 @@ import java.util.List;
 @Tag(name = "Модуль справочных материаллов")
 public class DictionaryController {
     public static final String ULR_PREFIX = "/dictionary";
-    private static final String LIST = "/list";
-    private static final String GET = "/{id}";
-    private static final String ADD = "/add";
-    private static final String UPDATE = "/update";
+    private static final String MENU_LIST = "/menu-list";
+    private static final String MENU_GET = "menu/{id}";
+    private static final String MENU_ADD_ITEM = "menu/add";
+    private static final String MENU_UPDATE_ITEM = "menu/update";
     @Autowired
     DictionaryServiceImpl dictionaryService;
 
-    @GetMapping(LIST)
+    @GetMapping(MENU_LIST)
     public List<MenuDto> listMenu() {
         return dictionaryService.listMenu();
     }
 
-    @GetMapping(GET)
+    @GetMapping(MENU_GET)
     public MenuDto getMenuItem(@PathVariable("id") Long id) {
         return dictionaryService.getMenuItem(id);
     }
 
-    @GetMapping(ADD)
+    @GetMapping(MENU_ADD_ITEM)
     public MenuDto addMenuItem(@RequestBody MenuDto  menuDto) {
         return dictionaryService.addMenuItem(menuDto);
     }
 
-    @GetMapping(UPDATE)
+    @GetMapping(MENU_UPDATE_ITEM)
     public MenuDto updateMenuItem(@RequestBody MenuDto menuDto) {
         return dictionaryService.updateMenuItem(menuDto);
     }

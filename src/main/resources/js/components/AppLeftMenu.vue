@@ -141,47 +141,8 @@ export default {
     return {
       drawer: true,
       items: null,
-      reques: {
-        header: {
-          service: "menu",
-          operation: "list",
-          sessionid: null,
-          hash: null
-        },
-        request: {}
-      },
-      menu1: {
-        name: "Администрирование",
-        img: "account_circle",
-        url: "",
-        children: [
-          {
-            name: "Справочник филиалов",
-            img: "class",
-            url: "/data",
-            children: []
-          },
-          {
-            name: "Тест 1",
-            img: "build",
-            url: "",
-            children: [
-              {
-                name: "Тест 1.1",
-                img: "commute",
-                url: "/addreport",
-                children: []
-              },
-              {
-                name: "Тест 1.2",
-                img: "done",
-                url: "/about",
-                children: []
-              }
-            ]
-          }
-        ]
-      },
+
+
       color: 'gray',
       colors: [
         'primary',
@@ -197,8 +158,7 @@ export default {
     }
   },
   computed: {
-    overlay()
-    {
+    overlay() {
       return this.$store.getters.getOverLay
     },
     bg() {
@@ -218,19 +178,22 @@ export default {
   created() {
 
     //тут получение меню
-    this.reques.header.sessionid = this.getSessionID
-    this.reques.header.hash = this.MD5(JSON.stringify(this.reques.request)).toUpperCase(),
-        this.$store.dispatch('GET_MENU', {data: this.reques})
+    console.log('get Menu List');
+    this.getMenuList();
 
   },
   methods: {
-    setBreadCump(item)
-     {
-       console.log('breadcump',item)
-       this.$store.dispatch('SET_BREAD_CUMP_MENU_LIST',{data:item})
-     },
+    getMenuList() {
+      this.$store.dispatch('SEND_REQUEST_GET', {
+        url: '/dictionary/menu-list'
+      })
+    },
+    setBreadCump(item) {
+      console.log('breadcump', item)
+      this.$store.dispatch('SET_BREAD_CUMP_MENU_LIST', {data: item})
+    },
     setPageModule(item) {
-      this.$store.dispatch("IS_HAPPENING_MENU",{data:false})
+      this.$store.dispatch("IS_HAPPENING_MENU", {data: false})
       console.log('page_module', item)
       this.$store.dispatch('SET_PAGE_MODULE', {
         pageModule: item.name

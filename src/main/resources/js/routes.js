@@ -4,6 +4,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
+import SignIn from "./views/SignIn.vue";
 //тест
 
 // import ContractDriver from "../components/contracts/type_atribut_contracts/ContractDriver.vue";

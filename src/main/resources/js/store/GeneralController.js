@@ -27,39 +27,7 @@ const resource_print = 'http://25.133.210.152:8888/ods/print'
 
 export default {
     state: {
-        serverList: [
-            {
-                //Сергей
-                name: 'Сервер для разработчиков'
-                , resource_url: 'http://127.0.0.1:8888/ods/query'
-                , resource_file_url: 'http://127.0.0.1:8888/ods/upload'
-                , resource_inbox_url: 'http://127.0.0.1:8888/ods/inbox'
-                , resource_file_download: 'http://127.0.0.1:8888/ods/download'
-                , resource_file_delete: 'http://127.0.0.1:8888/ods/delete'
-                , resource_print: 'http://127.0.0.1:8888/ods/print'
-            },
-            {
-                name: 'Тестовый сервер'
-                , resource_url: 'http://25.133.210.152:8888/ods/query'
-                , resource_file_url: 'http://25.133.210.152:8888/ods/upload'
-                , resource_inbox_url: 'http://25.133.210.152:8888/ods/inbox'
-                , resource_file_download: 'http://25.133.210.152:8888/ods/download'
-                , resource_file_delete: 'http://25.133.210.152:8888/ods/delete'
-                , resource_print: 'http://25.133.210.152:8888/ods/print'
-
-            },
-            {
-                name: ' Боевой сервер'
-                , resource_url: 'http://192.168.254.14:8080/ods/query'
-                , resource_file_url: 'http://192.168.254.14:8080/ods/upload'
-                , resource_inbox_url: 'http://192.168.254.14:8080/ods/inbox'
-                , resource_file_download: 'http://192.168.254.14:8080/ods/download'
-                , resource_file_delete: 'http://192.168.254.14:8080/ods/delete'
-                , resource_print: 'http://192.168.254.14:8080/ods/print'
-
-            }
-
-        ],
+        gateUrl:'',
         currentServer: {},
         resourcePrint: resource_print,
         checkContractInfo: false,
@@ -238,7 +206,7 @@ export default {
         CLEAN_PAGE_MODULE({commit}) {
             commit('CLEAN_MODULE_PAGE')
         },
-        SEND_REQUEST({commit,dispatch, state}, payload) {
+        SEND_REQUEST_POST({commit,dispatch, state}, payload) {
             // console.log('main payload',payload)
             return new Promise((resolve, reject) => {
                 Vue.axios.post(state.currentServer.resource_url, payload)
@@ -264,218 +232,35 @@ export default {
                 })
             });
         },
-        //ЗАГРУЗКА ФАЙЛА НА СЕРВЕР
-        UPLOAD_FILE({commit, state}, payload) {
+        SEND_REQUEST_GET({commit, getters}, payload) {
             // console.log('main payload',payload)
+            var url=getters.getGateUrl+payload.url
             return new Promise((resolve, reject) => {
-                Vue.axios.post(state.currentServer.resource_file_url, payload, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data;charset=UTF-8'
-
-                    }
+                Vue.axios.get(url, {
+                    // headers: {Authorization: getters.getToken}
                 })
                     .then(resp => {
                         commit('CLEAN_ERROR')
                         console.log('get Response ', resp.data)
-                        if (resp.data.header.status == 'OK') {
-                            console.log('status OK ', resp.data.response)
-                            // commit('SET_DATA', resp.data)
-                            resolve(resp.data)
-                        } else {
+                        // commit('SET_DATA', resp.data)
+                        resolve(resp.data)
 
-                            commit('SET_ERROR', resp.data.header.message)
-                            resolve(resp.data.header.message)
-                        }
                     }).catch(err => {
+                    commit('SET_ERROR', 'Ошибка подключения')
+                    console.log('error connect')
                     reject(err)
                 })
             });
         },
-        //ЗАГРУЗКА ИМПОРТА ДАННЫХ НА СЕРВЕР
-        UPLOAD_INBOX_FILE({commit, state}, payload) {
-            console.log('main payload', payload)
-            return new Promise((resolve, reject) => {
-                Vue.axios.post(state.currentServer.resource_inbox_url, payload, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data;charset=UTF-8'
-
-                    }
-                })
-                    .then(resp => {
-                        commit('CLEAN_ERROR')
-                        console.log('get Response ', resp.data)
-                        if (resp.data.header.status == 'OK') {
-                            console.log('status OK ', resp.data.response)
-                            // commit('SET_DATA', resp.data)
-                            resolve(resp.data)
-                        } else {
-
-                            commit('SET_ERROR', resp.data.header.message)
-                            resolve(resp.data.header.message)
-                        }
-                    }).catch(err => {
-                    reject(err)
-                })
-            });
-        },
-        // Получение списка
-        GET_ROWS({commit, dispatch}, payload) {
-            // console.log('GET_ROWS',payload.data)
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-                        // console.log('GET_ROWS', resolve.response.rows)
-                        commit('CLEAN_ERROR')
-                        payload.showRows(resolve.response.rows)
-
-                    }
-                )
-        },
-        GET_ITEM({commit, dispatch}, payload) {
-            console.log('GET_ITEM', payload.data)
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
 
 
-                        commit('CLEAN_ERROR')
-                        payload.showRows(resolve.response)
 
 
-                    }
-                )
-        },
-        //Сохранение ноного элемента
-        ADD_ITEM({dispatch, getters}, payload) {
-            console.log('ADD_ITEM', payload.data)
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-                        console.log('ADD_ITEM', resolve.response)
-                        if (getters.getError == null) {
-                            payload.saveSucces()
-                        } else {
-                            payload.saveError()
-                        }
 
 
-                    }
-                )
-        },
-        //Сохранение ноного элемента
-        ADD_ITEM_P({dispatch, getters}, payload) {
-            console.log('ADD_ITEM', payload.data)
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-                        console.log('ADD_ITEM', resolve.response)
-                        if (getters.getError == null) {
-                            payload.saveSucces(resolve.response)
-                        } else {
-                            payload.saveError()
-                        }
-
-
-                    }
-                )
-        },
-        //ЗАГРУЗКА ФАЙЛА С СЕРВЕРА
-        DOWNLOAD_FILE({commit}, payload) {
-            commit('CLEAN_ERROR')
-            console.log('main payload', payload.data)
-            var urlDownload = resource_file_download + '?id=' + payload.data
-            console.log('urlDownload', urlDownload)
-            window.location.replace(urlDownload);
-        },
-        DELETE_FILE({commit}, payload) {
-            console.log('delete file', payload)
-            return new Promise((resolve, reject) => {
-                Vue.axios.get(resource_file_delete + '?id=' + payload)
-                    .then(resp => {
-                        commit('CLEAN_ERROR')
-                        console.log('get Response ', resp.data)
-                        if (resp.data.header.status == 'OK') {
-                            console.log('status OK ', resp.data.response)
-                            // commit('SET_DATA', resp.data)
-                            resolve(resp.data)
-                        } else {
-                            commit('SET_ERROR', resp.data.header.message)
-                            resolve(resp.data.header.message)
-                        }
-                    }).catch(err => {
-                    reject(err)
-                })
-            });
-
-        },
-        //получение меню
-        GET_MENU({commit, dispatch}, payload) {
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-                        commit('SET_MENU', resolve.response.children)
-                    }
-                )
-        },
-        GET_NEWS({commit, dispatch}, payload) {
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-                        commit('SET_NEWS', resolve.response.data)
-                    }
-                )
-        },
-        GET_NEWS_DETAIL({dispatch}, payload) {
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-                        payload.getNewsDetail(resolve.response.body)
-                    }
-                )
-        },
-        DELETE_NEWS_DETAIL({dispatch, getters}, payload) {
-            console.log('DELETE_NEWS_DETAIL', payload.data)
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-                        console.log('DELETE_NEWS_DETAIL', resolve.response)
-                        if (getters.getError != null) {
-                            payload.statusError()
-
-                        } else {
-
-                            payload.statusSucces()  // commit('SET_POSTSALL', resolve)
-                        }
-
-
-                    }
-                )
-        },
-        GET_COUNTRY_LIST({commit, dispatch}, payload) {
-            dispatch('SEND_REQUEST', payload.data)
-                .then(resolve => {
-
-                        commit('SET_COUNTRY_LIST', resolve.response.rows)
-                    }
-                )
-        }
-        // GET_USERS({commit,dispatch},payload)
-        // {
-        //     dispatch('SEND_REQUEST', payload.data)
-        //         .then(resolve => {
-        //
-        //                 commit('SET_USERS', resolve.response.rows)
-        //             }
-        //         )
-        // }
-        // SEND_REQUEST({commit, state}, payload) {
-        //     return new Promise((resolve) => {
-        //     Vue.axios.post(resource_url,
-        //     payload.data)
-        //         .then(resp=>  {
-        //            resolve( state.data=resp.data)
-        //             if (resp.data) {
-        //                 commit('SET_DATA', resp.data)
-        //             }
-        //         }).catch(err=>{
-        //             console.log(err)
-        //     })
-        //     });
-        // }
     },
     getters: {
+        getGateUrl:(state)=>state.gateUrl,
         getProcessing: (state) => state.processing,
         getError: (state) => state.error,
         getData: (state) => state.data,
