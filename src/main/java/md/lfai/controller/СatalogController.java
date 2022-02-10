@@ -22,25 +22,30 @@ public class СatalogController {
     @Autowired
     CatalogServiceImpl catalogService;
 
-    @Operation(summary = "listCatalogTypeList", operationId = "Operation 1", description = "Выдает список каталога")
+    @Operation(summary = "Список типов товара", description = "Выдает список каталога")
     @GetMapping(LIST_CATALOG_TYPE)
     public List<CatalogTypeDto> listCatalogTypeList() {
-        return null;
+        return catalogService.listCatalogTypeList();
     }
 
     @PostMapping(ADD_CATALOG_TYPE)
+    @Operation(summary = "Добавление типа товара", description = "Выдает список каталога")
+
     public CatalogTypeDto addCatalogType(@RequestBody CatalogTypeDto catalogTypeDto) {
-        return null;
+        return catalogService.addCatalogType(catalogTypeDto);
     }
 
     @GetMapping(LIST_CATALOG)
+    @Operation(summary = "Список товаров", description = "Выдает список каталога")
+
     public List<CatalogDto> listCatalogList() {
-        return null;
+        return catalogService.listCatalogList();
     }
 
     @PostMapping(ADD_CATALOG)
-    public CatalogDto addCatalog(@RequestBody CatalogDto catalogTypeDto) {
-        return null;
+    @Operation(summary = "Добавление товара", description = "Выдает список каталога")
+    public CatalogDto addCatalog(@RequestBody CatalogDto catalogDto) {
+        return catalogService.addCatalog(catalogDto);
     }
 
 }
