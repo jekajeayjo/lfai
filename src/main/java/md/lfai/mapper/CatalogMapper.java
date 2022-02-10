@@ -4,9 +4,10 @@ import md.lfai.dto.CatalogDto;
 import md.lfai.dto.CatalogTypeDto;
 import md.lfai.entity.CatalogEntity;
 import md.lfai.entity.CatalogTypeEntity;
+import org.mapstruct.Mapper;
 
 import java.util.List;
-
+@Mapper(componentModel = "spring")
 public interface CatalogMapper {
     CatalogDto toDto(CatalogEntity catalogDto);
 
