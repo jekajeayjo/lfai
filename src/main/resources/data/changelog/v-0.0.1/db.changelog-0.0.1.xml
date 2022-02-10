@@ -20,6 +20,7 @@
     <include file="03-changeset-catalog.xml" relativeToChangelogFile="true"/>
     <include file="04-changeset-user-detail.xml" relativeToChangelogFile="true"/>
     <include file="05-changeset-user.xml" relativeToChangelogFile="true"/>
+    <include file="06-changeset-menu.xml" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>
